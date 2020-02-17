@@ -60,11 +60,20 @@ The median of lunch and dinner is look the same. In the lunch, the thrid quartil
 
 9. How does smoking behavior and gender of the person who pays impact the relationship between tip and total bill? Find a visualization that incorporates all four variables. Interpret the result.
 ```{r}
-ggplot(tips,aes(x=total_bill,y=tip))+geom_point(aes(color=sex))
+#ggplot(tips,aes(x=total_bill,y=tip))+geom_point(aes(color=sex))
+ggplot(tips,aes(x=total_bill,y=tip))+geom_point()+facet_grid(sex ~ smoker,labeller = label_both)
 ```
+
+The Female non-smoker is linear increase the tip as total bill increase while the Female smoker is more scatter than Female non-smoker.
+Similarly for male, non smoker pay more tips as total bill increase. While Male smoker is not linearly increase tip when total bill increase. 
+As we can see from the graph, the non smoker Male and Female data points has linearly increase model while Male and Female smoker pay tip not linear increase as total bill increase.
+
 10. Use ggplot2 to find a graphical summary of the relationship between day of the week and gender of the person paying the bill. What can you say about this relationship?
 ```{r}
-
+str(tips)
+s<-factor(tips$day,levels = c("Thur","Fri","Sat","Sun"))
+ggplot(tips,aes(s))+geom_bar(aes(fill=sex))
 ```
+From the bar plot graph, we can see on Thrusday the number of Male and Female pay bill equally similarly on Friday but the number of people paying bill is much more lower. On the weekend, there are more people pay bill and mostly is pay by male. 
 
 Note: your submission is supposed to be fully reproducible, i.e. the TA and I will 'knit' your submission in RStudio. 
